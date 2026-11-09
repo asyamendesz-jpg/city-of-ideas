@@ -1,0 +1,124 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
+  <meta name="color-scheme" content="light" />
+  <title>Город идей</title>
+  <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 16 16'%3E%3Cpath fill='%23e37b4d' d='M8 1.2 15 7.2h-2.2V14H3.2V7.2H1z'/%3E%3C/svg%3E" />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Nunito:wght@600;800&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="styles.css" />
+</head>
+<body>
+  <header class="topbar">
+    <div class="wordmark" id="wordmark">Город идей</div>
+    <div class="top-actions">
+      <div class="lang" id="lang-switch" role="group" aria-label="Язык">
+        <button type="button" data-lang="ru" aria-pressed="true">RU</button>
+        <button type="button" data-lang="en" aria-pressed="false">EN</button>
+      </div>
+      <button type="button" class="sound-toggle" id="sound-toggle" aria-pressed="false" data-sound="off" aria-label="Звук выключен">
+        <svg class="icon icon-off" viewBox="0 0 24 24" aria-hidden="true">
+          <path fill="currentColor" d="M3 9.5h3.2L11 5.2v13.6l-4.8-4.3H3z"/>
+          <path d="M15 9l6 6M21 9l-6 6" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"/>
+        </svg>
+        <svg class="icon icon-on" viewBox="0 0 24 24" aria-hidden="true" hidden>
+          <path fill="currentColor" d="M3 9.5h3.2L11 5.2v13.6l-4.8-4.3H3z"/>
+          <path d="M15 9.2a3.6 3.6 0 0 1 0 5.6M17.2 7a6.2 6.2 0 0 1 0 10" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"/>
+        </svg>
+      </button>
+    </div>
+  </header>
+
+  <main id="app" data-screen="select">
+    <section id="select-screen" class="screen select-screen">
+      <h1 id="title">Кем ты будешь в этом мире?</h1>
+      <div class="avatars" id="avatars"></div>
+    </section>
+
+    <section id="map-screen" class="screen map-screen" data-mode="select" hidden>
+      <div class="stage-wrap" id="stage-wrap">
+        <div class="stage" id="stage">
+          <div class="sky" aria-hidden="true"></div>
+          <div class="sun" aria-hidden="true"></div>
+          <div class="cloud c1" aria-hidden="true"></div>
+          <div class="cloud c2" aria-hidden="true"></div>
+          <div class="ground" aria-hidden="true"></div>
+          <svg class="trail" viewBox="0 0 100 100" preserveAspectRatio="none" aria-hidden="true">
+            <path id="trail-wide" class="wide"></path>
+            <path id="trail-narrow" class="narrow"></path>
+          </svg>
+
+          <div class="cottage" id="cottage" aria-hidden="true">
+            <svg viewBox="0 0 120 150">
+              <polygon points="60,12 110,62 10,62" fill="none" stroke="#5c4636" stroke-width="5" stroke-linejoin="round"/>
+              <rect x="24" y="60" width="72" height="74" rx="3" fill="none" stroke="#5c4636" stroke-width="5"/>
+              <rect class="win" x="46" y="78" width="28" height="22" rx="3" fill="none" stroke="#5c4636" stroke-width="4"/>
+            </svg>
+          </div>
+
+          <div class="house" id="house" data-state="empty" role="img" aria-label="Пустой домик">
+            <svg viewBox="0 0 200 240">
+              <polygon class="roof" points="100,16 186,90 14,90" fill="none" stroke="#5c4636" stroke-width="6" stroke-linejoin="round"/>
+              <rect class="walls" x="32" y="88" width="136" height="136" rx="4" fill="none" stroke="#5c4636" stroke-width="6"/>
+              <rect class="signplate" x="16" y="104" width="168" height="58" rx="8" fill="none" stroke="#5c4636" stroke-width="4" stroke-dasharray="7 6"/>
+            </svg>
+            <div class="sign-label" id="sign-label" aria-live="polite"></div>
+          </div>
+
+          <div class="hero" id="hero" data-hero="" role="img" aria-label="">
+            <div class="sprite" id="hero-sprite"></div>
+          </div>
+
+          <div class="side-slot" id="side-slot">
+            <button type="button" class="callout" id="build-callout">
+              <span class="pointer" aria-hidden="true">
+                <svg viewBox="0 0 64 64">
+                  <circle cx="32" cy="32" r="26" fill="#ffd166" stroke="#3f3226" stroke-width="4"/>
+                  <path d="M40 18 L22 32 L40 46" fill="none" stroke="#3f3226" stroke-width="5" stroke-linecap="round" stroke-linejoin="round"/>
+                </svg>
+              </span>
+              <span id="build-text">Напиши, что хочешь построить</span>
+            </button>
+
+            <form id="idea-form" class="idea-form" hidden novalidate>
+              <label id="idea-label" for="idea-input">Название</label>
+              <input id="idea-input" maxlength="40" autocomplete="off" enterkeyhint="done" placeholder="Мастерская тортов" />
+              <p class="example-note" id="example-note">Например</p>
+              <div class="example-row" id="examples">
+                <button type="button" class="chip" data-example="0">Мастерская тортов</button>
+                <button type="button" class="chip" data-example="1">Игровая площадка</button>
+              </div>
+              <button type="submit" class="confirm" id="idea-confirm">Построить</button>
+            </form>
+
+            <p class="callout neighbor-callout" id="neighbor-callout" hidden>
+              <span class="pointer" aria-hidden="true">
+                <svg viewBox="0 0 64 64">
+                  <circle cx="32" cy="32" r="26" fill="#ffe08a" stroke="#3f3226" stroke-width="4"/>
+                  <path d="M24 18 L42 32 L24 46" fill="none" stroke="#3f3226" stroke-width="5" stroke-linecap="round" stroke-linejoin="round"/>
+                </svg>
+              </span>
+              <span id="neighbor-text">Познакомься с соседями</span>
+            </p>
+          </div>
+        </div>
+      </div>
+
+      <div class="pad" id="pad" hidden>
+        <div class="pad-grid">
+          <button type="button" class="key-up" data-axis="forward" data-key="up" aria-label="Вперёд">↑</button>
+          <button type="button" class="key-left" data-axis="back" data-key="left" aria-label="Налево">←</button>
+          <button type="button" class="key-down" data-axis="back" data-key="down" aria-label="Назад">↓</button>
+          <button type="button" class="key-right" data-axis="forward" data-key="right" aria-label="Направо">→</button>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <noscript>Включите JavaScript, чтобы войти в город.</noscript>
+  <script src="game.js"></script>
+</body>
+</html>
