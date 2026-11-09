@@ -1,0 +1,841 @@
+<!doctype html>
+<html lang="ru">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<meta name="theme-color" content="#f6f2e7">
+<meta name="description" content="Игровой квартал Portfo: придумайте своё дело, соберите путь посетителя и сохраните чертёж проекта.">
+<title>Город идей · Portfo</title>
+<style>
+:root{--paper:#f6f2e7;--cream:#fffcf3;--ink:#293e33;--muted:#586b58;--green:#245645;--mint:#dde8ce;--orange:#db7047;--edge:#d8d9c8;--shadow:0 8px 24px #334a3520}*{box-sizing:border-box}body{margin:0;background:var(--paper);color:var(--ink);font:16px/1.5 system-ui,sans-serif}button,input,textarea,select{font:inherit;color:inherit}button,a{touch-action:manipulation}button{cursor:pointer}a{color:var(--green)}button:focus-visible,a:focus-visible,input:focus-visible,textarea:focus-visible,select:focus-visible{outline:3px solid #aa472a;outline-offset:3px}button:disabled{opacity:.55;cursor:default}.top,footer,main{width:min(1340px,100%);margin:auto;padding-inline:clamp(16px,4vw,56px)}.top,footer{display:flex;align-items:center;justify-content:space-between;gap:12px;padding-block:16px}.top{border-bottom:1px solid var(--edge)}footer{border-top:1px solid var(--edge);margin-top:32px;font-size:12px;color:var(--muted)}.brand{font-weight:850;letter-spacing:-1px;font-size:26px;text-decoration:none;white-space:nowrap}.brand span{color:var(--orange)}.brand small{font-size:10px;font-weight:750;letter-spacing:1.4px;margin-left:10px}.settings{display:flex;align-items:center;gap:8px}.settings button,.quiet{background:var(--cream);border:1px solid var(--edge);border-radius:8px;padding:8px 11px;font-size:13px}.settings button[aria-pressed=true]{background:var(--mint);border-color:#819777}.sound-group{display:flex;gap:5px}.title-row{display:flex;align-items:end;justify-content:space-between;gap:16px;margin:25px 0 16px}.kicker{font-size:10px;font-weight:850;letter-spacing:2px;text-transform:uppercase;color:var(--muted)}h1,h2,h3,p{margin-top:0}h1{font:normal clamp(38px,5.5vw,76px)/1 Georgia,serif;letter-spacing:-.055em;margin:6px 0 0}h2{font:normal clamp(25px,3vw,38px)/1.12 Georgia,serif;letter-spacing:-.035em;margin-bottom:10px}h3{font-size:16px;margin-bottom:8px}p{margin-bottom:12px}.muted{color:var(--muted);font-size:14px}.level{flex:none;border:1px solid #8b9d77;border-radius:40px;background:#e5ebd6;padding:7px 13px;font-size:12px;font-weight:800}.steps{list-style:none;margin:0 0 13px;padding:0;display:grid;grid-template-columns:repeat(4,1fr);gap:7px}.steps li{border:1px solid var(--edge);border-radius:10px;padding:7px 10px;font-size:12px;color:var(--muted);background:#ffffff40}.steps b{display:inline-grid;place-items:center;margin-right:5px;width:23px;height:23px;border-radius:50%;background:#e4e9d7;color:var(--green)}.steps .current{background:#e2ebd4;border-color:#9bac81;color:var(--ink);font-weight:780}.steps .done b{background:var(--green);color:white}.world{position:relative;overflow:hidden;isolation:isolate;background:#b4c99b;border:1px solid #a4b58c;border-radius:17px;box-shadow:var(--shadow);aspect-ratio:1000/470}.world>svg{display:block;width:100%;height:100%}.world-caption{position:absolute;top:14px;left:14px;padding:5px 10px;border-radius:6px;background:#fff9e9e9;font-size:10px;letter-spacing:1.4px;font-weight:850;pointer-events:none}.hotspot{position:absolute;z-index:3;transform:translate(-50%,-100%);background:var(--cream);border:1px solid #8a9d77;border-radius:9px;box-shadow:0 4px 10px #26453134;padding:6px 9px;font-size:clamp(10px,1.1vw,14px);font-weight:780;max-width:25%;text-align:center}.hotspot.target{background:#fff4cf;border:2px solid #b95d37;animation:cue 2s infinite}.hotspot.target::after{content:"";position:absolute;left:calc(50% - 6px);bottom:-7px;width:10px;height:10px;transform:rotate(45deg);border-right:2px solid #b95d37;border-bottom:2px solid #b95d37;background:#fff4cf}.world-label{position:absolute;transform:translateX(-50%);padding:3px 7px;border-radius:5px;background:#345341ee;color:#fff8e6;font-size:clamp(9px,1vw,13px);font-weight:750;text-align:center;max-width:24%;pointer-events:none;overflow-wrap:anywhere}.portrait{position:absolute;left:var(--x);top:var(--y);width:7.5%;max-width:78px;transform:translate(-50%,-85%);transition:left .27s ease,top .27s ease;pointer-events:none;z-index:2;filter:drop-shadow(0 3px 2px #2a412f33)}.portrait svg{display:block;width:100%}.portrait.walk svg{animation:step .19s alternate 2}.visitor{filter:hue-rotate(40deg)}.world [data-home-state=open] .door{animation:open .45s ease-out;transform-origin:left;transform-box:fill-box}.world [data-home-state=open] .glow{animation:cue 2s ease 1}@keyframes cue{50%{box-shadow:0 0 0 7px #ffce7b66}}@keyframes step{to{transform:translateY(-6%) rotate(4deg)}}@keyframes open{from{transform:scaleX(.14)}}.controls{display:flex;align-items:center;justify-content:space-between;gap:12px;margin:10px 0 15px}.directions{display:flex;gap:5px;flex:none}.directions button{width:38px;height:35px;padding:0}.dialog,.blueprint{border:1px solid var(--edge);background:var(--cream);border-radius:15px;padding:clamp(14px,2.3vw,24px);box-shadow:0 4px 14px #334a350a}.dialog:empty{display:none}.dialog .kicker{color:#925033}.panel-actions{display:flex;flex-wrap:wrap;align-items:center;gap:9px;margin-top:14px}.primary,.secondary{display:inline-block;text-decoration:none;font-weight:760;border-radius:9px;padding:10px 15px}.primary{background:var(--green);color:#fff;border:1px solid var(--green)}.primary:hover{background:#32715a}.secondary{border:1px solid #9aaa8f;background:#f2f4e8;color:var(--green)}label.field{display:block;font-size:14px;font-weight:740;margin-top:12px}input,textarea,select{width:100%;padding:10px 12px;border:1px solid #9baa94;border-radius:8px;background:white;margin-top:5px}textarea{min-height:84px;resize:vertical}.inline-form{max-width:700px}.opening{display:grid;grid-template-columns:1fr 1fr;gap:clamp(22px,5vw,60px);align-items:center;margin:45px 0 15px}.opening h1{margin-bottom:16px}.opening .world{aspect-ratio:1.25}.opening .world svg{width:100%;height:100%;object-fit:cover}.avatar-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:7px;margin-top:12px}.avatar{border:1px solid #b7c2a6;background:#fffaf0;border-radius:13px;padding:8px 4px 10px;font-weight:750;font-size:12px;min-width:0}.avatar:hover{background:#e5edda;border-color:#7c9472}.avatar svg{display:block;width:100%;height:72px;margin:auto}.board-grid{display:grid;grid-template-columns:1.08fr 1fr;gap:16px;margin:12px 0}.cards,.slots{display:grid;grid-template-columns:1fr 1fr;gap:7px}.card,.slot{border:1px solid #bdc7ad;border-radius:9px;background:#f3f5e8;padding:8px;text-align:left;font-size:13px;min-height:50px;overflow-wrap:anywhere}.card.selected{border:2px solid #27634a;background:#dbeacb;padding:7px}.slot{background:#f9f5e9;border-style:dashed}.slot.filled{background:#e7edda;border-style:solid}.slot.active{outline:2px solid #318365}.slot.blocked{outline:2px solid #b95134}.slot.passed{background:#d8edc7}.slot b{margin-right:5px;color:#5a7252}.visitor-line{background:#e8eedb;border-radius:9px;padding:9px 12px;font-size:14px}.feedback{padding:9px 12px;border-left:3px solid #557d58;background:#e8eedb;font-size:14px;margin-top:12px}.feedback.error{border-color:#ad5236;background:#f6e4d5}.blueprint{max-width:940px;margin:20px auto}.blueprint h1{margin-bottom:16px;overflow-wrap:anywhere}.blueprint .grid{display:grid;grid-template-columns:1fr 1fr;gap:13px}.sheet{background:#edf0df;border-radius:10px;padding:13px;overflow-wrap:anywhere}.sheet p:last-child{margin-bottom:0}.route-list{padding-left:22px;margin-bottom:0}.share{margin-top:12px;padding:10px;border-radius:9px;background:#f2f4e8}.share input{font-size:13px}.notice{min-height:20px;font-size:13px;margin:8px 0 0}.blueprint .footnote{margin-top:12px}.art-label{font:700 15px system-ui,sans-serif}.sr-only{position:absolute;width:1px;height:1px;overflow:hidden;clip:rect(0,0,0,0)}@media(max-width:720px){.brand small{display:none}.top{padding-block:11px}.settings button{font-size:11px;padding:6px}.title-row{margin-top:15px}.steps li{padding:5px;font-size:10px}.steps b{display:block;margin:0 0 3px;width:18px;height:18px}.opening{grid-template-columns:1fr;margin:18px 0 8px;gap:15px}.opening .world{aspect-ratio:2.15;order:2}.world{aspect-ratio:1000/590}.hotspot{font-size:9px;padding:4px;max-width:32%}.world-caption{top:6px;left:6px;font-size:8px}.board-grid,.blueprint .grid{grid-template-columns:1fr}.controls .muted{font-size:11px}.directions button{width:32px;height:32px}.avatar svg{height:60px}footer{align-items:start}.level{font-size:10px}}@media(prefers-reduced-motion:reduce){*,*::before,*::after{animation:none!important;transition:none!important}}
+.window-sign{position:absolute;transform:translateX(-50%);max-width:18%;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;background:#fbefcc;color:#594b36;border:1px solid #a68d60;border-radius:4px;padding:1px 5px;font-size:clamp(8px,1vw,12px);pointer-events:none}
+@media(max-width:720px){.hotspot[data-action=neighbor]{max-width:18%}.hotspot[data-action=home]{max-width:25%}.world-label{max-width:19%;max-height:11%;overflow:hidden}}
+</style>
+</head>
+<body>
+<header class="top"><a class="brand" href="https://portfo.ru/" target="_blank" rel="noopener"><span>◈</span> portfo <small>PLAY STUDIO</small></a><div id="settings" class="settings"></div></header>
+<main id="app"></main>
+<footer><a id="portfolio" href="https://portfo.ru/" target="_blank" rel="noopener">Портфолио Аси ↗</a><span id="footer-copy"></span></footer>
+<script>
+const words = {
+  ru: {
+    city:'Город идей', edition:'PORTFO · ИГРОВОЙ КВАРТАЛ 01', level:'Уровень',
+    steps:['Открой','Реши задачу','Пройди маршрут','Повысь уровень'],
+    welcome:'Кем ты будешь в этом мире?', intro:'Исследуй квартал, открой своё дело и помоги первому посетителю найти то, за чем он пришёл.',
+    choose:'Выбери героя', woman:'Женщина',man:'Мужчина',girl:'Девочка',boy:'Мальчик',
+    effects:'Звуки',music:'Музыка', map:'КВАРТАЛ 01 · КАРТА', portfolio:'Портфолио Аси ↗', footer:'Игра о создании цифровых проектов · Ася Мельникова',
+    move:'Стрелки, WASD или нажатие на тропинку', left:'Влево',right:'Вправо',up:'Вверх',down:'Вниз',
+    build:'Напиши, что хочешь построить', home:'Твой участок', door:'Открыть задание', idea:'Название или идея', example:'Например, мастерская тортов или игровая площадка',
+    raise:'Поставить вывеску', neighbor:'Познакомься с соседями', talk:'Поговорить', demo:'Демонстрационный дом',
+    similar:'Нажми «Познакомься с соседями» или на подсвеченный дом. Герой сам пройдёт по тропинке.',
+    explore:'Нажми «Познакомься с соседями», чтобы пойти к первому дому, или выбери другого соседа на карте.',
+    difference:'За чем люди придут именно к тебе?', differenceExample:'Например, дети сами украшают торт на празднике',
+    saveDifference:'Добавить отличие к дому', return:'Вернись к своей двери', houseReady:'Отличие появилось в витрине. Вернись к домику — у двери ждёт посетитель.',
+    puzzle:'Собери дорожку для посетителя', pick:'Нажми карточку, затем место на дорожке. Карточки также можно перетаскивать.',
+    cards:'Карточки действий', slots:'Дорожка посетителя', empty:'Свободное место', select:'Сначала выбери карточку или перетащи её сюда.',
+    remove:'Убрать выбранную карточку с дорожки', test:'Позвать посетителя', next:'Сделать шаг', retry:'Исправить дорожку', clear:'Очистить дорожку',
+    before:'Посетитель у входа. Сделай первый шаг.', ready:'Дорожка ведёт к открытию дома.', arrived:'Посетитель дошёл до цели. Дверь открыта!',
+    missing:'На этом месте дорожка прерывается. Добавь действие и попробуй ещё раз.',
+    wrong:'Здесь посетитель останавливается.', success:'Дом открыт!', blueprint:'Открыть чертёж', demoOpen:'Пример открытого дома',
+    topic:'Дело и его отличие', goal:'Задача посетителя', tested:'Проверенный маршрут', model:'Модель из PDF',
+    format:'Формат проекта', website:'Сайт', app:'Веб-приложение', interactive:'Интерактивный проект',
+    notes:'Что добавить в первую версию?', editIdea:'Название проекта', editDifference:'Чем отличается',
+    save:'Сохранить чертёж', saved:'Чертёж сохранён в браузере.', share:'Сохранить или поделиться', adult:'Показать взрослому',
+    adultHint:'Покажи взрослому эту постройку и откройте чертёж вместе.', shareHint:'Ссылка открывает копию чертежа. Добавляй в него только то, чем хочешь поделиться.',
+    shareLabel:'Ссылка на чертёж', copyLink:'Скопировать ссылку', copied:'Скопировано.', selectCopy:'Текст выделен. Скопируй его через меню или Ctrl+C.',
+    download:'Скачать чертёж', contact:'Написать Асе о проекте',
+    invitation:'У твоего дела уже есть место и свой характер. Хочешь открыть его для настоящих посетителей? Ася поможет превратить задумку в работающий сайт, приложение или интерактив. После запуска твой проект сможет стать частью этого мира.',
+    written:'Обсудим проект только письменно. Детали, стоимость и сроки согласуем в переписке.',
+    draft:'Текст для письменной заявки', copyDraft:'Скопировать заявку', form:'Открыть форму Portfo ↗', paste:'Вставь текст в поле «Маршрут / что хотите сделать» на Portfo и отправь его от своего имени.',
+    draftHello:'Ася, здравствуйте! Хочу письменно обсудить разработку проекта.',
+    status:'Статус проекта', statuses:{draft:'Чертёж',building:'Строится',open:'Открыт'},
+    local:'Дом открыт в игре. Чертёж готов к обсуждению разработки.', readOnly:'Чертёж из игры', sharedTitle:'Постройка игрока', startOwn:'Построить свой домик',
+    reset:'Начать заново', resetPrompt:'Удалить текущий прогресс в этом браузере и начать заново?', close:'Закрыть', invalid:'Эта ссылка на чертёж повреждена.',
+    source:'Идеи основаны на PDF «16 неисчерпаемых источников дохода на сайтах».',
+    action:['Выбери карточку','Заполни места','Испытай маршрут','Дом открыт'],
+    okay:'Посетитель продолжает путь.', returnGame:'Вернуться в квартал',
+    sharedNote:'Чтобы поделиться чертежом, открой игру по её веб-адресу.', edit:'Редактировать чертёж'
+  },
+  en: {
+    city:'City of Ideas', edition:'PORTFO · PLAYABLE DISTRICT 01', level:'Level',
+    steps:['Unlock','Solve','Walk the route','Level up'],
+    welcome:'Who will you be in this world?', intro:'Explore the district, open your own business, and help your first visitor find what they came for.',
+    choose:'Choose your character', woman:'Woman',man:'Man',girl:'Girl',boy:'Boy',
+    effects:'Effects',music:'Music', map:'DISTRICT 01 · MAP', portfolio:'Asya’s portfolio ↗', footer:'A game about creating digital projects · Asya Melnikova',
+    move:'Arrow keys, WASD, or tap a path', left:'Left',right:'Right',up:'Up',down:'Down',
+    build:'Write what you want to build', home:'Your plot', door:'Open the challenge', idea:'Name or idea', example:'For example, a cake workshop or a playground',
+    raise:'Put up the sign', neighbor:'Meet a neighbor', talk:'Talk', demo:'Example building',
+    similar:'Select “Meet a neighbor” or tap the highlighted house. Your character will follow the path.',
+    explore:'Select “Meet a neighbor” to visit the first house, or choose another neighbor on the map.',
+    difference:'What would people come specifically to you for?', differenceExample:'For example, kids can decorate their own cakes at a party',
+    saveDifference:'Add your difference', return:'Return to your front door', houseReady:'Your window now shows what makes you different. Head back to meet your first visitor.',
+    puzzle:'Build a route for your visitor', pick:'Select a card, then a space on the route. You can also drag cards into place.',
+    cards:'Action cards', slots:'Visitor route', empty:'Empty space', select:'Choose a card first, or drag one here.',
+    remove:'Remove the selected card from the route', test:'Invite the visitor', next:'Take a step', retry:'Fix the route', clear:'Clear route',
+    before:'The visitor is at the entrance. Take the first step.', ready:'The route leads to your front door.', arrived:'Your visitor reached their goal. The door is open!',
+    missing:'The path breaks here. Add an action and try again.',
+    wrong:'Your visitor stops here.', success:'House unlocked!', blueprint:'Open blueprint', demoOpen:'Example of an open house',
+    topic:'Business and what sets it apart', goal:'Visitor’s goal', tested:'Tested route', model:'Model from the guide',
+    format:'Project format', website:'Website', app:'Web app', interactive:'Interactive project',
+    notes:'What should the first version include?', editIdea:'Project name', editDifference:'What sets it apart',
+    save:'Save blueprint', saved:'Blueprint saved in this browser.', share:'Save or share', adult:'Show an adult',
+    adultHint:'Show this building to an adult and look at the blueprint together.', shareHint:'The link opens a copy of your blueprint. Include only details you want to share.',
+    shareLabel:'Blueprint link', copyLink:'Copy link', copied:'Copied.', selectCopy:'Text selected. Copy it from the menu or press Ctrl+C.',
+    download:'Download blueprint', contact:'Write to Asya about this project',
+    invitation:'Your idea has a place and a personality. Want to open it to real visitors? Asya can turn it into a working website, app, or interactive experience. Once launched, your project could become part of this world.',
+    written:'We’ll discuss your project in writing. We’ll agree on the details, cost, and timeline by message.',
+    draft:'Written inquiry', copyDraft:'Copy inquiry', form:'Open the Portfo contact form ↗', paste:'Paste this text into the project description field on Portfo and send it in your own name.',
+    draftHello:'Hello Asya! I’d like to discuss developing my project in writing.',
+    status:'Project status', statuses:{draft:'Blueprint',building:'In development',open:'Open'},
+    local:'Your house is open in the game. The blueprint is ready for a development discussion.', readOnly:'Blueprint from the game', sharedTitle:'A player’s creation', startOwn:'Build my own house',
+    reset:'Start over', resetPrompt:'Clear your progress in this browser and start over?', close:'Close', invalid:'This blueprint link is invalid.',
+    source:'Inspired by the supplied guide on 16 ways to earn from websites.',
+    action:['Choose a card','Fill the spaces','Test the route','House unlocked'],
+    okay:'Your visitor moves on.', returnGame:'Return to the district',
+    sharedNote:'To share this blueprint, open the game at its web address.', edit:'Edit blueprint'
+  }
+};
+
+const scenarios = {
+  bakery: {
+    match:/торт|кондитер|пекар|выпеч|десерт|cake|baker|pastry|dessert/i,
+    format:'website',
+    title:['Мастерская «Сахар»','Sugar Workshop'],
+    pitch:['Я пеку праздничные торты по готовым эскизам.','I bake celebration cakes from a set of existing designs.'],
+    goal:['Мне нужен торт на детский праздник. Покажите варианты, которые будут готовы к субботе.','I need a cake for a children’s party. Show me options that will be ready by Saturday.'],
+    model:['Продажа своих товаров и услуг','Selling your own products and services'],
+    route:['occasion','date','cakes','order'],
+    deck:['phone','cakes','occasion','gallery','order','date'],
+    cards:{
+      occasion:['Выбрать повод','Choose the occasion'],date:['Уточнить дату','Check the date'],cakes:['Посмотреть подходящие торты','See suitable cakes'],order:['Оставить заявку на торт','Request a cake'],
+      phone:['Сразу спросить телефон','Ask for a phone number immediately'],gallery:['Открыть случайную галерею','Open a random gallery']
+    },
+    hints:{
+      occasion:['Сначала выясни, для какого праздника нужен торт.','Find out what kind of celebration the cake is for first.'],
+      date:['Спроси дату, чтобы показать только то, что успеют приготовить.','Ask for the date to show only cakes that can be ready in time.'],
+      cakes:['Покажи варианты для этого повода и даты.','Show options that fit the occasion and date.'],
+      order:['Теперь можно предложить оставить заявку на выбранный торт.','Now offer to request the cake they chose.']
+    }
+  },
+  learn: {
+    match:/школ|обуч|курс|урок|учеб|учёб|репетитор|school|learn|lesson|course|study|tutor/i,
+    format:'app',
+    title:['Учебный клуб «Лист»','Leaf Learning Club'],
+    pitch:['В моём клубе есть короткие уроки по рисованию для начинающих.','My club offers short drawing lessons for beginners.'],
+    goal:['Хочу научиться рисовать. Можно сначала попробовать урок и понять, что входит в подписку?','I want to learn to draw. Can I try a lesson and see what the subscription includes?'],
+    model:['Контент по подписке','Subscription content'],
+    route:['skill','sample','benefits','subscribe'],
+    deck:['pay','sample','subscribe','skill','news','benefits'],
+    cards:{
+      skill:['Уточнить уровень','Ask about skill level'],sample:['Открыть пробный урок','Open a sample lesson'],benefits:['Показать, что входит в подписку','Show what the subscription includes'],subscribe:['Предложить оформить доступ','Offer membership'],
+      pay:['Попросить оплату у входа','Request payment at the entrance'],news:['Показать новости клуба','Show club news']
+    },
+    hints:{
+      skill:['Уточни уровень, чтобы подобрать первый урок.','Find out their level so you can choose a first lesson.'],
+      sample:['Дай попробовать урок, прежде чем говорить о доступе.','Let them try a lesson before talking about membership.'],
+      benefits:['Объясни, что человек получит по подписке.','Explain what the subscription gives them.'],
+      subscribe:['Теперь человек может решить, оформлять ли доступ.','Now the visitor can decide whether to join.']
+    }
+  },
+  play: {
+    match:/игр|квест|площадк|головолом|game|playground|puzzle|quest/i,
+    format:'interactive',
+    title:['Игровая «Искра»','Spark Arcade'],
+    pitch:['Я делаю короткие игры для компаний друзей.','I make short games for groups of friends.'],
+    goal:['Хочу сыграть с другом. Покажите, что можно пройти вдвоём, и дайте попробовать.','I want to play with a friend. Show me something for two players and let me try it.'],
+    model:['Брендированный интерактив · нативная реклама','Branded interactive experience · native advertising'],
+    route:['group','mode','demo','partner'],
+    deck:['banner','demo','group','contact','partner','mode'],
+    cards:{
+      group:['Уточнить число игроков','Ask how many players'],mode:['Предложить игру на двоих','Offer a two-player game'],demo:['Пройти пробный раунд','Play a trial round'],partner:['Открыть бонус от партнёра','Unlock the partner bonus'],
+      banner:['Показать рекламу поверх игры','Show an ad over the game'],contact:['Попросить контакт до игры','Ask for contact details before play']
+    },
+    hints:{
+      group:['Сначала узнай, сколько человек хочет играть.','Find out how many people want to play first.'],
+      mode:['Предложи режим, в котором можно играть вдвоём.','Offer a mode two people can play together.'],
+      demo:['Дай сыграть пробный раунд, чтобы человек понял правила.','Let them play a trial round to learn the rules.'],
+      partner:['После игры покажи бонус и ясно обозначь партнёра.','After the game, show the bonus and clearly identify the partner.']
+    }
+  },
+  general: {
+    format:'website',
+    model:['Продажа своих товаров и услуг','Selling your own products and services'],
+    route:['need','offer','example','action'],
+    deck:['phone','example','need','news','action','offer'],
+    cards:{
+      need:['Выяснить задачу посетителя','Find out what the visitor needs'],offer:['Показать, что предлагает проект','Show what the project offers'],example:['Дать посмотреть пример','Let them see an example'],action:['Предложить следующий шаг','Offer a next step'],
+      phone:['Сразу спросить телефон','Ask for a phone number immediately'],news:['Показать все новости','Show all the news']
+    },
+    hints:{
+      need:['Сначала пойми, за чем пришёл человек.','Find out why the visitor came first.'],
+      offer:['Покажи, как твоё предложение отвечает на эту задачу.','Show how your offer addresses their need.'],
+      example:['Дай пример, по которому можно оценить результат.','Give them an example to judge the result.'],
+      action:['Предложи понятный следующий шаг: попробовать, заказать или написать.','Offer a clear next step: try it, place an order, or write a message.']
+    }
+  }
+};
+
+const avatars = {
+  woman: ['#b67055','#4e3939','#d97f5c',false,true],
+  man: ['#c98762','#4d382d','#537d88',false,false],
+  girl: ['#e0a876','#624839','#bd6987',true,true],
+  boy: ['#9f654a','#353332','#6a8955',true,false]
+};
+
+function person(id) {
+  const [skin,hair,coat,child,long] = avatars[id] || avatars.woman;
+  return `<svg viewBox="0 0 82 104" aria-hidden="true"><ellipse cx="42" cy="96" rx="22" ry="5" fill="#314c39" opacity=".24"/><g transform="translate(0 ${child ? 14 : 0}) scale(${child ? '.91 .86' : '1'})">
+  <path d="M30 73l-2 17h12l3-15 3 15h12l-3-18" fill="#3c5153"/><path d="M25 92h17v-5H31zm20 0h17l-4-5H45z" fill="#263a35"/>
+  ${long ? `<path d="M21 40v14q6 8 21 5 20 3 22-9l-4-21z" fill="${hair}"/>` : ''}
+  <path d="M22 68q0-15 13-18h15q12 1 16 17l-7 5-5-10 3 19H29l1-19-4 10z" fill="${coat}" stroke="#313f352b" stroke-width="2"/>
+  <path d="M25 66l-4 6q-3 7 2 8t7-8m31-6 5 6q4 6-1 7t-7-7" fill="${skin}"/>
+  <circle cx="42" cy="32" r="19" fill="${skin}"/><path d="M23 36q-7-23 10-27 13-8 25 3 6 4 4 23-6-3-8-16-12 10-26 7l-2 10z" fill="${hair}"/>
+  <circle cx="36" cy="34" r="1.7" fill="#2d3430"/><circle cx="49" cy="34" r="1.7" fill="#2d3430"/><path d="M38 42q4 3 8 0" stroke="#78463d" fill="none" stroke-linecap="round"/>
+  </g></svg>`;
+}
+
+const plots = {home:224,bakery:460,learn:685,play:875};
+
+function house(x, y, palette, type, status) {
+  const [wall,roof,door] = palette;
+  const outline = status === 'empty';
+  const open = status === 'open';
+  return `<g transform="translate(${x} ${y})" data-home-state="${status}">
+    <ellipse cx="0" cy="83" rx="90" ry="16" fill="#557050" opacity=".20"/>
+    <path d="M-81 69l13-17 135 1 17 17-11 14H-65z" fill="#a7b78a"/>
+    <path d="M-65 15l65-42 65 42v58H-65z" fill="${outline?'#e1e4bd':wall}" stroke="${outline?'#5e7958':'#675b46'}" stroke-width="3" ${outline?'stroke-dasharray="7 5"':''}/>
+    <path d="M65 15l18 9v40l-18 9" fill="${outline?'#bdcc9c':'#687456'}" opacity=".65"/>
+    <path d="M-78 16L-5-41 72 10l-8 11L-4-23-70 28z" fill="${outline?'#ced9a8':roof}" stroke="${outline?'#5e7958':'#675b46'}" stroke-width="3" ${outline?'stroke-dasharray="7 5"':''}/>
+    <path d="M-5-41l20-4 70 52-13 3z" fill="${outline?'#bdca9b':roof}" stroke="#615844" stroke-width="2" opacity=".72"/>
+    <rect x="-16" y="34" width="32" height="40" rx="9" fill="${open?'#fff0a5':outline?'#d3dbac':door}" stroke="#665a48" stroke-width="2" class="door"/>
+    <circle cx="10" cy="55" r="2" fill="#e8ca76"/>
+    <g fill="${outline?'#e8ebc8':'#fce2a1'}" stroke="#6e6c51" stroke-width="2">
+    <rect x="-53" y="38" width="23" height="23" rx="3"/><rect x="30" y="38" width="23" height="23" rx="3"/>
+    <path d="M-42 38v23m-11-11h23m71-12v23m-11-11h23" opacity=".7"/>
+    </g>
+    <rect x="-34" y="12" width="68" height="15" rx="4" fill="${outline?'#e8ebc8':'#fbf0cf'}" stroke="#766d4d"/>
+    ${type ? `<text x="0" y="24" font-size="13" fill="#584c3b" text-anchor="middle">${type}</text>` : ''}
+    ${open ? '<path class="glow" d="M-20 74h40l21 36h-82z" fill="#ffe59b" opacity=".38"/>' : ''}
+  </g>`;
+}
+
+function mapArt(homeState, focus, cover=false) {
+  const shrubs = [[30,156,1],[118,92,.75],[303,124,1],[392,174,.7],[541,103,.95],[720,135,.9],[952,160,1],[75,421,1],[345,451,.65],[620,435,1],[944,430,.9],[985,300,.65]];
+  const trees = shrubs.map(([x,y,s])=>`<g transform="translate(${x} ${y}) scale(${s})"><ellipse cx="6" cy="8" rx="28" ry="11" fill="#6a8960" opacity=".28"/><path d="M0 12v-31" stroke="#816949" stroke-width="6"/><circle cx="-10" cy="-19" r="19" fill="#799d67"/><circle cx="8" cy="-24" r="23" fill="#668c58"/><circle cx="-2" cy="-32" r="15" fill="#88a96c"/></g>`).join('');
+  const flowers = Array.from({length:38},(_,i)=>{
+    const x=(i*73+29)%970+13, y=i%2?435+i%24:80+i*19%83;
+    return `<path d="M${x} ${y}l2-5 2 5" stroke="#729960" fill="none"/><circle cx="${x+2}" cy="${y-5}" r="2" fill="${i%3?'#e9d994':'#d88d70'}"/>`;
+  }).join('');
+  const path = focus && focus !== 'home' ? `<path d="M224 365H${plots[focus]}V303" fill="none" stroke="#a55032" stroke-width="4" stroke-dasharray="4 10" stroke-linecap="round"/>` : '';
+  return `<svg viewBox="${cover?'75 65 850 415':'0 0 1000 470'}" preserveAspectRatio="none" aria-hidden="true"><defs><pattern id="grain" width="35" height="35" patternUnits="userSpaceOnUse"><circle cx="4" cy="8" r="1" fill="#739769" opacity=".25"/><path d="M23 26l2-4 2 4" stroke="#739769" opacity=".32" fill="none"/></pattern></defs>
+  <rect width="1000" height="470" fill="#b5c99b"/><rect width="1000" height="470" fill="url(#grain)"/>
+  <path d="M0 65Q205 6 430 55T1000 50V0H0z" fill="#d6dfb3"/><path d="M0 85Q250 29 502 66T1000 72" fill="none" stroke="#e4e6bc" stroke-width="15"/>
+  <path d="M0 380Q135 357 252 365T495 367Q720 371 1000 350" fill="none" stroke="#97ac7d" stroke-width="49"/>
+  <path d="M0 377Q135 354 252 362T495 364Q720 368 1000 347" fill="none" stroke="#e3cf9e" stroke-width="40"/>
+  <path d="M224 365v-81m236 81v-81m225 81v-81m190 76v-76" stroke="#e6d2a4" stroke-width="25" stroke-linecap="round"/>
+  <path d="M0 377Q135 354 252 362T495 364Q720 368 1000 347" fill="none" stroke="#f1deae" stroke-width="2" stroke-dasharray="8 11"/>
+  <path d="M24 297q60-37 121-9v-75q-46-20-101 6z" fill="#9fbd8f"/><ellipse cx="86" cy="266" rx="39" ry="20" fill="#85ada1" stroke="#dfdfaa" stroke-width="5"/><path d="M60 267q11-4 23 0m5 6q9-3 18 0" fill="none" stroke="#d8e2bb" stroke-width="2"/>
+  ${trees}${flowers}
+  ${house(224,217,['#e7b778','#b56850','#5a6952'],homeState==='open'?'✦':'',homeState)}
+  ${house(460,217,['#efd59f','#bd7457','#98634f'],'✿','built')}
+  ${house(685,217,['#d9dbac','#637d70','#535f60'],'▤','built')}
+  ${house(875,217,['#ead5a4','#a38576','#765c6c'],'★','built')}
+  ${path}
+  </svg>`;
+}
+
+const storageKey = 'portfo-city-v1';
+const blank = () => ({
+  lang:'ru', avatar:null, x:224, y:304, idea:'', difference:'', scene:'general',
+  slots:[null,null,null,null], open:false, notes:'', format:'website', effects:false, music:false
+});
+const read = () => {
+  try { return {...blank(),...JSON.parse(localStorage.getItem(storageKey) || '{}')}; }
+  catch { return blank(); }
+};
+let state = read();
+let panel = '', neighbor = '', selection = null, step = -1, error = '', notice = '';
+let shareVisible = false, inquiryVisible = false, invalidShare = false;
+let shared = decodeShare();
+if (shared && !state.avatar) state.lang = shared.lang;
+
+const app = document.querySelector('#app');
+const settings = document.querySelector('#settings');
+const t = () => words[state.lang] || words.ru;
+const local = value => value[state.lang === 'en' ? 1 : 0];
+const esc = value => String(value ?? '').replace(/[&<>"']/g, c => ({
+  '&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'
+}[c]));
+const data = () => scenarios[state.scene];
+const save = () => { try { localStorage.setItem(storageKey,JSON.stringify(state)); } catch {} };
+const matching = idea => Object.keys(plots).find(id => scenarios[id]?.match?.test(idea)) || 'general';
+const gameStep = () => state.open ? 3 : step >= 0 ? 2 : state.difference ? 1 : 0;
+const goal = record => scenarios[record.scene].goal ? local(scenarios[record.scene].goal) :
+  state.lang === 'en'
+    ? `I found “${record.idea}”. Show me how “${record.difference}” would help and what I can do next.`
+    : `Я нашёл проект «${record.idea}». Покажи, чем мне поможет «${record.difference}» и что я могу сделать дальше.`;
+const cardText = id => local(data().cards[id]);
+const label = (key, text, value, max=120) =>
+  `<label class="field">${esc(text)}<input name="${key}" value="${esc(value)}" maxlength="${max}" required></label>`;
+const button = (action, text, css='secondary') => `<button type="button" class="${css}" data-action="${action}">${esc(text)}</button>`;
+const steps = (active=-1) => `<ol class="steps">${t().steps.map((word,i)=>
+  `<li class="${i===active?'current':i<active?'done':''}" ${i===active?'aria-current="step"':''}><b aria-hidden="true">${['⌂','◇','↗','★'][i]}</b>${word}</li>`
+).join('')}</ol>`;
+
+function render() {
+  document.documentElement.lang = state.lang;
+  document.title = t().city + ' · Portfo';
+  document.querySelector('#portfolio').textContent = t().portfolio;
+  document.querySelector('#footer-copy').textContent = t().footer;
+  settings.innerHTML = `<button data-action="ru" aria-pressed="${state.lang==='ru'}" lang="ru">RU</button><button data-action="en" aria-pressed="${state.lang==='en'}" lang="en">EN</button>
+    <span class="sound-group"><button data-action="effects" aria-pressed="${state.effects}">◉ ${t().effects}</button><button data-action="music" aria-pressed="${state.music}">♫ ${t().music}</button></span>`;
+  if (shared || panel === 'blueprint') {
+    renderBlueprint(shared || state);
+  } else if (!state.avatar) {
+    renderOpening();
+  } else {
+    renderWorld();
+  }
+}
+function renderOpening() {
+  const w = t();
+  app.innerHTML = `<section class="opening"><div>
+    <div class="kicker">${w.edition}</div><h1>${w.city}</h1><p>${w.intro}</p>
+    <h2>${w.welcome}</h2><div class="avatar-grid" aria-label="${w.choose}">
+    ${Object.keys(avatars).map(id=>`<button class="avatar" data-action="avatar" data-id="${id}">${person(id)}${w[id]}</button>`).join('')}
+    </div>${invalidShare?`<p class="feedback error">${w.invalid}</p>`:''}</div>
+    <div class="world">${mapArt('empty',null,true)}<span class="world-caption">${w.map}</span></div>
+    </section>${steps()}<p class="muted">${w.source}</p>`;
+}
+function positioned(id, text, action, isTarget=false) {
+  return `<button class="hotspot ${isTarget?'target':''}" style="left:${plots[id]/10}%;top:40%" data-action="${action}" data-id="${id}">${esc(text)}</button>`;
+}
+function renderWorld() {
+  const w = t();
+  const looking = state.idea && !state.difference;
+  const target = looking ? (state.scene === 'general' ? 'bakery' : state.scene) : null;
+  const homeAction = state.open ? w.blueprint : !state.idea ? w.build : state.difference ? w.door : w.home;
+  const homeX = !state.idea ? 29 : plots.home/10;
+  const visitor = panel === 'puzzle' && step >= 0;
+  app.innerHTML = `<div class="title-row"><div><div class="kicker">${w.edition}</div><h1>${w.city}</h1></div>
+    <span class="level">${w.level} ${state.open?2:1}</span></div>
+    ${steps(gameStep())}<section id="world" class="world" aria-label="${w.map}">
+    ${mapArt(state.open?'open':state.idea?'built':'empty',target)}
+    <span class="world-caption">${w.map}</span>
+    ${looking
+      ? `<button class="hotspot target" style="left:${homeX}%;top:40%" data-action="neighbor" data-id="${target}">${esc(w.neighbor)} →</button>`
+      : `<button class="hotspot target" style="left:${homeX}%;top:${state.idea?40:54}%" data-action="home">${esc(homeAction)}</button>`}
+    ${Object.keys(plots).filter(id=>id!=='home').map(id=>positioned(id,local(scenarios[id].title),'neighbor',looking && (!target || id===target))).join('')}
+    <div class="portrait" id="hero" style="--x:${state.x/10}%;--y:${state.y/4.7}%">${person(state.avatar)}</div>
+    ${visitor?`<div class="portrait visitor" id="walker" style="--x:${(155+step*18)/10}%;--y:${(365-step*16)/4.7}%">${person('woman')}</div>`:''}
+    ${state.idea?`<div class="world-label" style="left:22.4%;top:52.5%" title="${esc(state.idea)}">${esc(state.idea)}${state.difference?' ✦':''}</div>`:''}
+    ${state.difference?`<div class="window-sign" style="left:22.4%;top:63%" title="${esc(state.difference)}">${esc(state.difference)}</div>`:''}
+    </section>
+    <div class="controls"><span class="muted">${w.move}</span><div class="directions">
+    ${[['left','←'],['up','↑'],['down','↓'],['right','→']].map(([id,icon])=>`<button class="quiet" data-action="move" data-id="${id}" aria-label="${w[id]}">${icon}</button>`).join('')}
+    </div></div>
+    <section class="dialog" id="dialog" aria-label="${esc(w.city)}">${worldDialog()}</section>
+    <div class="panel-actions">${button('reset',w.reset,'quiet')}</div>`;
+}
+function worldDialog() {
+  const w=t();
+  if (panel === 'idea') return `<h2>${w.build}</h2><form class="inline-form" data-form="idea">
+    <label class="field">${w.idea}<input name="idea" value="${esc(state.idea)}" placeholder="${w.example}" maxlength="90" required></label>
+    <div class="panel-actions"><button class="primary">${w.raise}</button></div></form>`;
+  if (panel === 'neighbor') return `<div class="kicker">${w.demo}</div><h2 tabindex="-1">${local(scenarios[neighbor].title)}</h2><p>${local(scenarios[neighbor].pitch)}</p>
+    ${state.idea && !state.open?`<form class="inline-form" data-form="difference"><label class="field">${w.difference}
+    <input name="difference" value="${esc(state.difference)}" placeholder="${w.differenceExample}" maxlength="160" required></label>
+    <div class="panel-actions"><button class="primary">${w.saveDifference}</button></div></form>`:''}`;
+  if (panel === 'puzzle') return puzzle();
+  if (state.open) return `<div class="kicker">${w.level} 2</div><h2>${w.success}</h2><p>${w.arrived}</p>${button('blueprint',w.blueprint,'primary')}`;
+  if (state.difference) return `<h2>${w.return}</h2><p>${esc(state.difference)}</p><p class="muted">${w.houseReady}</p>`;
+  if (state.idea) {
+    const firstNeighbor = state.scene === 'general' ? 'bakery' : state.scene;
+    return `<h2>${w.neighbor}</h2><p>${state.scene==='general'?w.explore:w.similar}</p>
+      <button type="button" class="primary" data-action="neighbor" data-id="${firstNeighbor}">${w.neighbor} →</button>`;
+  }
+  return '';
+}
+function puzzle() {
+  const w = t(), scenario = data();
+  return `<div class="kicker">${esc(local(scenario.model))}</div><h2>${w.puzzle}</h2>
+    <p class="visitor-line">❝ ${esc(goal(state))}</p><p class="muted">${w.pick}</p>
+    <div class="board-grid"><div><h3>${w.cards}</h3><div class="cards">${scenario.deck.map(id=>
+      `<button class="card ${selection?.id===id?'selected':''}" draggable="true" data-action="card" data-id="${id}" aria-pressed="${selection?.id===id}">${esc(cardText(id))}</button>`).join('')}</div></div>
+    <div><h3>${w.slots}</h3><div class="slots">${state.slots.map((id,i)=>
+      `<button class="slot ${id?'filled':''} ${step===i?(error?'blocked':'active'):i<step?'passed':''}" draggable="${!!id}" data-action="slot" data-id="${i}"><b>${i+1}</b>${id?esc(cardText(id)):w.empty}</button>`).join('')}</div></div></div>
+    <div class="panel-actions">
+    ${error && step>=0?button('retry',w.retry,'primary'):step>=0?button('next',w.next,'primary'):button('test',w.test,'primary')}
+    ${selection?.from!=null?button('remove',w.remove):''}${button('clear',w.clear,'quiet')}</div>
+    <p class="feedback ${error?'error':''}" role="status">${esc(error || notice || w.ready)}</p>`;
+}
+function projectRecord(record) {
+  return {v:1,lang:state.lang,idea:record.idea,difference:record.difference,scene:record.scene,format:record.format,notes:record.notes,status:'draft'};
+}
+function decodeShare() {
+  if (!location.hash.startsWith('#project=')) return null;
+  try {
+    const fragment = location.hash.slice(9);
+    if (fragment.length>4500) throw Error('Oversized');
+    const bytes=Uint8Array.from(atob(fragment.replace(/-/g,'+').replace(/_/g,'/')), c=>c.charCodeAt(0));
+    const payload=JSON.parse(new TextDecoder().decode(bytes));
+    if(payload.v!==1 || !Object.hasOwn(scenarios,payload.scene) || !['ru','en'].includes(payload.lang) ||
+      !['website','app','interactive'].includes(payload.format) || !['idea','difference','notes'].every(k=>typeof payload[k]==='string') ||
+      !payload.idea.trim() || payload.idea.length>90 || payload.difference.length>160 || payload.notes.length>350) throw Error('Invalid');
+    return payload;
+  } catch { invalidShare=true; return null; }
+}
+function shareUrl(record) {
+  const bytes=new TextEncoder().encode(JSON.stringify(projectRecord(record)));
+  const code=btoa(String.fromCharCode(...bytes)).replace(/\+/g,'-').replace(/\//g,'_').replace(/=+$/,'');
+  return location.origin+location.pathname+'#project='+code;
+}
+function brief(record) {
+  const w=t(), scene=scenarios[record.scene];
+  const route=scene.route.map((id,i)=>`${i+1}. ${local(scene.cards[id])}`).join('\n');
+  return [w.draftHello, `${w.topic}\n${record.idea}\n${record.difference}`, `${w.goal}\n${goal(record)}`,
+    `${w.tested}\n${route}`, `${w.format}\n${w[record.format]}`, `${w.model}\n${local(scene.model)}`,
+    record.notes?`${w.notes}\n${record.notes}`:'',w.written].filter(Boolean).join('\n\n');
+}
+function renderBlueprint(record) {
+  const w=t(), scenario=scenarios[record.scene], child=['boy','girl'].includes(state.avatar) && !shared;
+  app.innerHTML = `<section class="blueprint">
+    <div class="kicker">${shared?w.readOnly:w.level+' 2 · '+w.success}</div><h1>${esc(record.idea)}</h1>
+    <div class="world" style="aspect-ratio:3.2">${mapArt('open',null,true)}<span class="world-caption">${esc(shared?w.sharedTitle:record.idea)}</span></div>
+    <p class="muted footnote">${w.status} · <strong>${w.statuses.draft}</strong> · ${w[record.format]}</p>
+    <div class="grid"><div class="sheet"><h3>${w.topic}</h3><p>${esc(record.difference)}</p><h3>${w.goal}</h3><p>${esc(goal(record))}</p></div>
+    <div class="sheet"><h3>${w.tested}</h3><ol class="route-list">${scenario.route.map(id=>`<li>${esc(local(scenario.cards[id]))}</li>`).join('')}</ol>
+    <p class="muted footnote">${esc(local(scenario.model))}</p></div></div>
+    ${shared ? (record.notes?`<p class="footnote"><strong>${w.notes}</strong><br>${esc(record.notes)}</p>`:'') :
+    `<details><summary>${w.edit}</summary><form data-form="blueprint">
+    ${label('idea',w.editIdea,record.idea,90)}${label('difference',w.editDifference,record.difference,160)}
+    <label class="field">${w.format}<select name="format">${['website','app','interactive'].map(f=>`<option value="${f}" ${f===record.format?'selected':''}>${w[f]}</option>`).join('')}</select></label>
+    <label class="field">${w.notes}<textarea name="notes" maxlength="350">${esc(record.notes)}</textarea></label>
+    <div class="panel-actions"><button class="primary">${w.save}</button></div></form></details>`}
+    <div class="panel-actions">${!shared?button('share',child?w.adult:w.share,'primary'):''}
+    ${button('download',w.download)}${shared?button('own',w.startOwn):button('map',w.returnGame)}</div>
+    ${shareVisible&&!shared?`<div class="share"><p>${child?w.adultHint:w.shareHint}</p>
+      ${location.protocol==='file:'?`<p>${w.sharedNote}</p>`:`<label class="field">${w.shareLabel}<input id="share-value" readonly value="${esc(shareUrl(record))}"></label>${button('copyLink',w.copyLink)}`}
+      </div>`:''}
+    <hr style="border:0;border-top:1px solid var(--edge);margin:22px 0">
+    ${child?`<p>${w.adultHint}</p>`:`<p>${w.invitation}</p><p><strong>${w.written}</strong></p>
+    ${button('inquiry',w.contact,'primary')}
+    ${inquiryVisible?`<div class="share"><label class="field">${w.draft}<textarea id="inquiry-value" rows="8" readonly>${esc(brief(record))}</textarea></label>
+    <div class="panel-actions">${button('copyDraft',w.copyDraft)}<a class="primary" href="https://portfo.ru/#collab-form" target="_blank" rel="noopener">${w.form}</a></div><p class="muted">${w.paste}</p></div>`:''}`}
+    <p class="notice" id="notice" role="status">${esc(notice)}</p>
+    </section>`;
+}
+
+let audioContext, melodyTimer;
+function audio() {
+  try {
+    audioContext ||= new (window.AudioContext || window.webkitAudioContext)();
+    if (audioContext.state==='suspended') audioContext.resume().catch(()=>{});
+    return audioContext;
+  } catch { return null; }
+}
+const oscillators = new Set();
+function tone(hz, delay, duration, volume, channel) {
+  const ctx=audio();
+  if (!ctx) return;
+  const osc=ctx.createOscillator(), gain=ctx.createGain();
+  const at=ctx.currentTime+delay;
+  osc.type='sine';
+  osc.frequency.value=hz;
+  gain.gain.setValueAtTime(.0001,at);
+  gain.gain.exponentialRampToValueAtTime(volume,at+.055);
+  gain.gain.exponentialRampToValueAtTime(.0001,at+duration);
+  osc.connect(gain).connect(ctx.destination);
+  const note={osc,channel};
+  oscillators.add(note);
+  osc.onended=()=>{osc.disconnect();gain.disconnect();oscillators.delete(note);};
+  osc.start(at);
+  osc.stop(at+duration+.025);
+}
+function silence(channel) {
+  for (const note of oscillators) {
+    if (note.channel===channel) try { note.osc.stop(); } catch {}
+  }
+}
+function effect(success=false) {
+  if (state.effects) (success?[523,659,784]:[440]).forEach((n,i)=>tone(n,i*.09,.25,.025,'effects'));
+}
+function music() {
+  clearInterval(melodyTimer);
+  silence('music');
+  if (!state.music || !audio()) return;
+  const phrase=()=>[261.6,392,329.6,440,293.7,349.2].forEach((n,i)=>tone(n,i*.92,1.4,.011,'music'));
+  phrase();
+  melodyTimer=setInterval(phrase,7800);
+}
+function panelScroll() {
+  if (matchMedia('(max-width: 720px)').matches) document.querySelector('#dialog')?.scrollIntoView({block:'nearest'});
+}
+function moveTo(x,y) {
+  state.x=Math.round(Math.max(35,Math.min(970,x)));
+  state.y=Math.round(Math.max(297,Math.min(385,y)));
+  const hero=document.querySelector('#hero');
+  if (hero) {
+    hero.style.setProperty('--x',state.x/10+'%');
+    hero.style.setProperty('--y',state.y/4.7+'%');
+    hero.classList.remove('walk');
+    void hero.offsetWidth;
+    hero.classList.add('walk');
+  }
+  save();
+}
+function move(direction) {
+  const branch=Object.values(plots).find(x=>Math.abs(x-state.x)<26);
+  if (direction==='up' && branch) moveTo(branch,state.y-20);
+  if (direction==='down') moveTo(state.x,state.y+20);
+  if (direction==='left' || direction==='right') {
+    const sign=direction==='left'?-1:1;
+    if (state.y<345) moveTo(state.x,state.y+23);
+    else moveTo(state.x+sign*24,365);
+  }
+}
+function visit(id, nextPanel) {
+  const old={x:state.x,y:state.y};
+  state.x=plots[id];
+  state.y=305;
+  panel=nextPanel;
+  save();
+  render();
+  const hero=document.querySelector('#hero');
+  const walk = hero && !matchMedia('(prefers-reduced-motion: reduce)').matches
+    ? hero.animate?.([
+    {left:old.x/10+'%',top:old.y/4.7+'%'},
+    {left:old.x/10+'%',top:'77.6%',offset:.19},
+    {left:state.x/10+'%',top:'77.6%',offset:.79},
+    {left:state.x/10+'%',top:state.y/4.7+'%'}
+    ],{duration:Math.min(1100,350+Math.abs(old.x-state.x)),easing:'ease-in-out'}) : null;
+  effect();
+  if (nextPanel !== 'neighbor') {
+    panelScroll();
+    return;
+  }
+  const revealDialog = () => {
+    if (panel !== 'neighbor' || neighbor !== id) return;
+    const dialogue = document.querySelector('#dialog');
+    dialogue?.scrollIntoView({block:'nearest'});
+    dialogue?.querySelector('h2')?.focus({preventScroll:true});
+  };
+  if (walk?.finished) walk.finished.then(revealDialog, () => {});
+  else revealDialog();
+}
+function put(index, piece) {
+  if (!piece || !Number.isInteger(index) || index<0 || index>3 || !data().cards[piece.id]) return;
+  const previous=state.slots.indexOf(piece.id);
+  if (previous!==-1 && previous!==index) state.slots[previous]=state.slots[index];
+  state.slots[index]=piece.id;
+  selection=null;
+  step=-1;
+  error='';
+  notice='';
+  save();
+  effect();
+  render();
+  app.querySelector(`[data-action="slot"][data-id="${index}"]`)?.focus({preventScroll:true});
+}
+function progressRoute() {
+  const scenario=data(), current=state.slots[step], expected=scenario.route[step];
+  if (current!==expected) {
+    error=(current?t().wrong:t().missing)+' '+local(scenario.hints[expected]);
+    render();
+    return;
+  }
+  step++;
+  if (step===scenario.route.length) {
+    state.open=true;
+    panel='';
+    save();
+    effect(true);
+    render();
+    panelScroll();
+    return;
+  }
+  notice=t().okay+' '+local(scenario.cards[current])+' ✓';
+  effect();
+  render();
+  const walker=document.querySelector('#walker');
+  walker?.animate([{left:(155+(step-1)*18)/10+'%',top:(365-(step-1)*16)/4.7+'%'},{left:(155+step*18)/10+'%',top:(365-step*16)/4.7+'%'}],
+    {duration:matchMedia('(prefers-reduced-motion: reduce)').matches?0:280,easing:'ease-out'});
+}
+function updateSetting(action) {
+  const form=app.querySelector('form'), formType=form?.dataset.form;
+  const values=form?Object.fromEntries(new FormData(form)):{};
+  const expanded=app.querySelector('details')?.open;
+  if (action==='ru'||action==='en') {
+    state.lang=action;
+    if (error && step>=0) {
+      error=(state.slots[step]?t().wrong:t().missing)+' '+local(data().hints[data().route[step]]);
+    } else if (step>=0) notice=step===0?t().before:t().okay;
+  } else {
+    state[action]=!state[action];
+    if (action==='music') music();
+    else if (state.effects) effect();
+    else silence('effects');
+  }
+  save();
+  render();
+  const newForm=app.querySelector('form');
+  if (newForm?.dataset.form===formType && formType) {
+    for (const [name,value] of Object.entries(values)) newForm.elements.namedItem(name).value=value;
+  }
+  if (expanded) app.querySelector('details')?.setAttribute('open','');
+  settings.querySelector(`[data-action="${action}"]`)?.focus({preventScroll:true});
+}
+async function copyField(id) {
+  const field=document.getElementById(id);
+  if (!field) return;
+  try {
+    await navigator.clipboard.writeText(field.value);
+    notice=t().copied;
+  } catch {
+    field.focus();
+    field.select();
+    notice=t().selectCopy;
+  }
+  const status=document.querySelector('#notice');
+  if (status) status.textContent=notice;
+}
+function download(record) {
+  const url=URL.createObjectURL(new Blob([brief(record)],{type:'text/plain;charset=utf-8'}));
+  const a=document.createElement('a');
+  a.href=url;
+  a.download='city-of-ideas-blueprint.txt';
+  a.click();
+  setTimeout(()=>URL.revokeObjectURL(url),1000);
+}
+function switchPanel(next) {
+  panel=next;
+  notice='';
+  render();
+  if (next==='blueprint'||next==='') window.scrollTo({top:0,behavior:'instant'});
+}
+
+document.addEventListener('click', event=>{
+  const control=event.target.closest('[data-action]');
+  if (!control) {
+    const world=event.target.closest('#world');
+    if (world) {
+      const box=world.getBoundingClientRect();
+      const x=(event.clientX-box.left)/box.width*1000;
+      const y=(event.clientY-box.top)/box.height*470;
+      const branch=Object.values(plots).find(plot=>Math.abs(plot-x)<32);
+      moveTo(branch && y<350?branch:x,branch && y<350?305:365);
+    }
+    return;
+  }
+  const {action,id}=control.dataset;
+  const w=t();
+  switch (action) {
+    case 'ru': case 'en': case 'effects': case 'music':
+      updateSetting(action);
+      break;
+    case 'avatar':
+      state.avatar=id;
+      state.x=224;
+      state.y=342;
+      save();
+      if (state.music) music();
+      render();
+      requestAnimationFrame(()=>requestAnimationFrame(()=>{
+        if (state.y===342 && state.x===224 && !state.idea) moveTo(224,305);
+      }));
+      break;
+    case 'move':
+      move(id);
+      break;
+    case 'home':
+      if (state.open) switchPanel('blueprint');
+      else if (!state.idea) {
+        visit('home','idea');
+        app.querySelector('input[name="idea"]')?.focus({preventScroll:true});
+      } else if (state.difference) visit('home','puzzle');
+      else {
+        visit('home','');
+        panelScroll();
+      }
+      break;
+    case 'neighbor':
+      neighbor=id;
+      if (!state.open) { step=-1; error=''; selection=null; notice=''; }
+      visit(id,'neighbor');
+      break;
+    case 'card':
+      selection={id,from:null};
+      render();
+      app.querySelector(`[data-action="card"][data-id="${id}"]`)?.focus({preventScroll:true});
+      break;
+    case 'slot': {
+      const index=Number(id);
+      if (selection) put(index,selection);
+      else if (state.slots[index]) {
+        selection={id:state.slots[index],from:index};
+        render();
+        app.querySelector(`[data-action="slot"][data-id="${id}"]`)?.focus({preventScroll:true});
+      } else {
+        notice=w.select;
+        render();
+      }
+      break;
+    }
+    case 'remove':
+      if (selection?.from!=null) state.slots[selection.from]=null;
+      selection=null;
+      step=-1;
+      error='';
+      notice='';
+      save();
+      render();
+      break;
+    case 'clear':
+      state.slots=[null,null,null,null];
+      selection=null;
+      step=-1;
+      error='';
+      notice='';
+      save();
+      render();
+      break;
+    case 'test':
+      step=0;
+      error='';
+      notice=w.before;
+      selection=null;
+      render();
+      app.querySelector('[data-action="next"]')?.focus({preventScroll:true});
+      break;
+    case 'next':
+      progressRoute();
+      app.querySelector('[data-action="next"], [data-action="retry"], .dialog [data-action="blueprint"]')?.focus({preventScroll:true});
+      break;
+    case 'retry':
+      step=-1;
+      error='';
+      notice='';
+      render();
+      break;
+    case 'blueprint':
+      switchPanel('blueprint');
+      break;
+    case 'map':
+      switchPanel('');
+      break;
+    case 'share':
+      save();
+      shareVisible=!shareVisible;
+      render();
+      break;
+    case 'inquiry':
+      inquiryVisible=!inquiryVisible;
+      render();
+      document.querySelector('#inquiry-value')?.focus();
+      break;
+    case 'copyLink': copyField('share-value'); break;
+    case 'copyDraft': copyField('inquiry-value'); break;
+    case 'download': download(shared||state); break;
+    case 'own':
+      history.replaceState(null,'',location.pathname+location.search);
+      shared=null;
+      invalidShare=false;
+      switchPanel('');
+      break;
+    case 'reset':
+      if (confirm(w.resetPrompt)) {
+        state={...blank(),lang:state.lang,effects:state.effects,music:state.music};
+        panel='';
+        selection=null;
+        step=-1;
+        error='';
+        notice='';
+        shareVisible=false;
+        inquiryVisible=false;
+        save();
+        render();
+        window.scrollTo(0,0);
+      }
+  }
+});
+document.addEventListener('submit', event=>{
+  const form=event.target;
+  const type=form.dataset.form;
+  if (!type) return;
+  event.preventDefault();
+  const fields=Object.fromEntries(new FormData(form));
+  const required=type==='idea'?['idea']:type==='difference'?['difference']:['idea','difference'];
+  for (const name of required) {
+    if (!fields[name]?.trim()) {
+      form.elements.namedItem(name).value='';
+      form.elements.namedItem(name).reportValidity();
+      return;
+    }
+  }
+  if (type==='idea') {
+    state.idea=fields.idea.trim();
+    state.scene=matching(state.idea);
+    state.format=data().format;
+    panel='';
+  } else if (type==='difference') {
+    state.difference=fields.difference.trim();
+    panel='';
+  } else if (type==='blueprint') {
+    state.idea=fields.idea.trim();
+    state.difference=fields.difference.trim();
+    state.format=fields.format;
+    state.notes=fields.notes.trim();
+    notice=t().saved;
+  }
+  save();
+  effect(true);
+  render();
+});
+const directions = {arrowleft:'left',a:'left',ф:'left',arrowright:'right',d:'right',в:'right',arrowup:'up',w:'up',ц:'up',arrowdown:'down',s:'down',ы:'down'};
+document.addEventListener('keydown', event=>{
+  if (event.target.closest('input,textarea,select,[contenteditable]') || event.ctrlKey || event.metaKey || event.altKey) return;
+  const direction=directions[event.key.toLowerCase()];
+  if (!direction || !state.avatar || shared || panel==='blueprint') return;
+  event.preventDefault();
+  move(direction);
+});
+let dragged=null;
+document.addEventListener('dragstart', event=>{
+  const el=event.target.closest('[data-action="card"],[data-action="slot"]');
+  if (!el || !el.draggable) return;
+  const from=el.dataset.action==='slot'?Number(el.dataset.id):null;
+  dragged={id:from===null?el.dataset.id:state.slots[from],from};
+  event.dataTransfer.setData('text/plain',dragged.id);
+  event.dataTransfer.effectAllowed='move';
+});
+document.addEventListener('dragover', event=>{
+  if (dragged && event.target.closest('.slot')) event.preventDefault();
+});
+document.addEventListener('drop', event=>{
+  const slot=event.target.closest('.slot');
+  if (!dragged||!slot) return;
+  event.preventDefault();
+  put(Number(slot.dataset.id),dragged);
+  dragged=null;
+});
+document.addEventListener('dragend',()=>{dragged=null;});
+window.addEventListener('hashchange',()=>{
+  invalidShare=false;
+  shared=decodeShare();
+  if (shared) state.lang=shared.lang;
+  render();
+});
+document.addEventListener('visibilitychange',()=>{
+  if (document.hidden) {
+    clearInterval(melodyTimer);
+    silence('music');
+    silence('effects');
+  } else if (state.music && audioContext) music();
+});
+render();
+document.addEventListener('pointerdown',function restoreSound(event) {
+  if (state.music && !event.target.closest('[data-action="music"]') && !audioContext) music();
+},{once:true});
+</script>
+</body>
+</html>
